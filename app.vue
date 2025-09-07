@@ -9,7 +9,7 @@
 <script setup lang="ts">
 // Мета теги для SEO
 useHead({
-  titleTemplate: '%s - Medicly',
+  titleTemplate: 'Komir - Медицинская платформа',
   meta: [
     { name: 'description', content: 'Современная медицинская платформа для связи с врачами' },
     { name: 'theme-color', content: '#0085FE' }
@@ -19,7 +19,7 @@ useHead({
 // Глобальные стили
 useSeoMeta({
   ogType: 'website',
-  ogSiteName: 'Medicly',
+  ogSiteName: 'Komir',
   twitterCard: 'summary_large_image'
 })
 </script>

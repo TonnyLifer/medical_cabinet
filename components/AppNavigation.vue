@@ -33,9 +33,9 @@
       <div class="flex items-center flex-shrink-0 px-4 mb-6">
         <div class="flex items-center space-x-3">
           <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">
-            <Icon name="heroicons:heart" class="w-6 h-6 text-white" />
+            <img src="@/assets/images/logo.png" alt="logo"/>
           </div>
-          <span class="text-xl font-bold text-gray-900">Medicly</span>
+          <span class="text-xl font-bold text-gray-900">Комир</span>
         </div>
       </div>
       

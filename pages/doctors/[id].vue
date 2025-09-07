@@ -86,105 +86,18 @@
     <!-- Контент табов -->
     <div class="px-4 pb-4">
       <!-- Обо мне -->
-      <div v-if="activeTab === 'about'" class="space-y-6">
-        <div class="bg-white rounded-2xl p-6 shadow-sm">
-          <h3 class="font-semibold text-gray-900 mb-3">О враче</h3>
-          <p class="text-gray-600 leading-relaxed">{{ doctor.about }}</p>
-        </div>
-
-        <div class="bg-white rounded-2xl p-6 shadow-sm">
-          <h3 class="font-semibold text-gray-900 mb-3">Образование</h3>
-          <div class="space-y-2">
-            <div
-              v-for="edu in doctor.education"
-              :key="edu"
-              class="flex items-center space-x-3"
-            >
-              <Icon name="heroicons:academic-cap" class="w-5 h-5 text-medical-500" />
-              <span class="text-gray-600">{{ edu }}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-2xl p-6 shadow-sm">
-          <h3 class="font-semibold text-gray-900 mb-3">Услуги</h3>
-          <div class="space-y-3">
-            <div
-              v-for="service in services"
-              :key="service.name"
-              class="flex items-center justify-between p-3 bg-gray-50 rounded-xl"
-            >
-              <div class="flex items-center space-x-3">
-                <Icon :name="service.icon" class="w-5 h-5 text-medical-500" />
-                <span class="font-medium">{{ service.name }}</span>
-              </div>
-              <span class="text-medical-600 font-semibold">{{ service.price }}₽</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <DoctorAbout v-show="activeTab === 'about'" :doctor="doctor" />
 
       <!-- Отзывы -->
-      <div v-if="activeTab === 'reviews'" class="space-y-4">
-        <div
-          v-for="review in reviews"
-          :key="review.id"
-          class="bg-white rounded-2xl p-6 shadow-sm"
-        >
-          <div class="flex items-start space-x-4">
-            <div class="w-12 h-12 bg-gray-200 rounded-xl flex items-center justify-center">
-              <Icon name="heroicons:user" class="w-6 h-6 text-gray-500" />
-            </div>
-            <div class="flex-1">
-              <div class="flex items-center justify-between mb-2">
-                <h4 class="font-semibold text-gray-900">{{ review.userName }}</h4>
-                <div class="flex items-center space-x-1">
-                  <Icon 
-                    v-for="star in 5"
-                    :key="star"
-                    name="heroicons:star"
-                    class="w-4 h-4"
-                    :class="star <= review.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'"
-                  />
-                </div>
-              </div>
-              <p class="text-gray-600 text-sm mb-2">{{ review.comment }}</p>
-              <p class="text-xs text-gray-400">{{ formatDate(review.date) }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <DoctorReviews v-show="activeTab === 'reviews'" :reviews="reviews" />
 
       <!-- Расписание -->
-      <div v-if="activeTab === 'schedule'" class="space-y-4">
-        <div class="bg-white rounded-2xl p-6 shadow-sm">
-          <h3 class="font-semibold text-gray-900 mb-4">Ближайшие свободные слоты</h3>
-          
-          <div class="space-y-4">
-            <div
-              v-for="(daySlots, date) in groupedSlots"
-              :key="date"
-              class="border-b border-gray-100 last:border-0 pb-4 last:pb-0"
-            >
-              <h4 class="font-medium text-gray-900 mb-3">{{ formatDate(date) }}</h4>
-              <div class="grid grid-cols-3 gap-2">
-                <button
-                  v-for="slot in daySlots"
-                  :key="slot.id"
-                  class="py-2 px-3 text-sm font-medium rounded-lg border transition-all"
-                  :class="selectedSlot?.id === slot.id
-                    ? 'bg-medical-500 text-white border-medical-500'
-                    : 'bg-white text-gray-700 border-gray-200 hover:border-medical-300'"
-                  :disabled="!slot.isAvailable"
-                  @click="selectSlot(slot)"
-                >
-                  {{ slot.time }}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <DoctorSchedule 
+        v-show="activeTab === 'schedule'" 
+        :available-slots="doctor.availableSlots"
+        :selected-slot="selectedSlot"
+        @slot-select="selectSlot"
+      />
     </div>
 
     <!-- Нижняя панель с кнопками -->
@@ -376,21 +289,6 @@ const reviews = [
     date: '2024-01-05'
   }
 ]
-
-const groupedSlots = computed(() => {
-  const groups: Record<string, TimeSlot[]> = {}
-  
-  doctor.value?.availableSlots
-    .filter(slot => slot.isAvailable)
-    .forEach(slot => {
-      if (!groups[slot.date]) {
-        groups[slot.date] = []
-      }
-      groups[slot.date].push(slot)
-    })
-  
-  return groups
-})
 
 const toggleFavorite = () => {
   isFavorite.value = !isFavorite.value

@@ -29,7 +29,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'Medicly - Медицинская платформа',
+      title: 'Комир - Медицинская платформа',
       meta: [
         { name: 'description', content: 'Современная платформа для связи с врачами и медицинскими услугами' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' }

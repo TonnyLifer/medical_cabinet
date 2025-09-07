@@ -15,28 +15,11 @@
     </div>
 
     <!-- Фильтры по статусу -->
-    <div class="bg-white px-4 py-3 border-b border-gray-100">
-      <div class="flex space-x-1 bg-gray-100 rounded-xl p-1">
-        <button
-          v-for="filter in statusFilters"
-          :key="filter.value"
-          class="flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all"
-          :class="activeStatusFilter === filter.value 
-            ? 'bg-white text-medical-600 shadow-sm' 
-            : 'text-gray-600 hover:text-gray-900'"
-          @click="activeStatusFilter = filter.value"
-        >
-          {{ filter.label }}
-          <UBadge
-            v-if="getCountByStatus(filter.value) > 0"
-            :label="getCountByStatus(filter.value).toString()"
-            color="gray"
-            size="xs"
-            class="ml-2"
-          />
-        </button>
-      </div>
-    </div>
+    <FilterSwiperApp
+      :filters="statusFiltersWithCount"
+      :active-filter="activeStatusFilter"
+      @filter-change="activeStatusFilter = $event"
+    />
 
     <!-- Список записей -->
     <div class="px-4 py-4 space-y-4">
@@ -316,6 +299,13 @@ const isSubmittingReview = ref(false)
 const selectedAppointment = ref<Appointment | null>(null)
 const reviewRating = ref(0)
 const reviewComment = ref('')
+
+const statusFiltersWithCount = computed(() => {
+  return statusFilters.map(filter => ({
+    ...filter,
+    count: getCountByStatus(filter.value)
+  }))
+})
 
 const statusFilters = [
   { label: 'Все', value: 'all' },
