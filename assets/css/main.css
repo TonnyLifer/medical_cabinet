@@ -140,6 +140,18 @@ body {
   }
 }
 
+/* Принудительные стили для кнопок "Посмотреть все" */
+.view-all-button {
+  color: #10b981 !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.view-all-button:hover {
+  color: #059669 !important;
+  background-color: #f9fafb !important;
+}
+
 /* Принудительные стили для поиска */
 .search-input {
   background-color: white !important;

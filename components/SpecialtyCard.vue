@@ -1,6 +1,6 @@
 <template>
   <div
-    class="rounded-2xl px-4 py-3 shadow-sm hover:shadow-md transition-all cursor-pointer min-w-[120px]"
+    class="rounded-2xl px-4 py-2 pb-4 mb-2 shadow-sm hover:shadow-md transition-all cursor-pointer min-w-[120px]"
     :class="isActive ? 'bg-blue-600 text-white' : 'bg-white'"
     @click="$emit('click', item)"
   >

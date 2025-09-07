@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white rounded-2xl p-4 shadow-sm hover:shadow-md transition-all cursor-pointer min-w-[160px]"
+    class="bg-white rounded-2xl px-4 py-2 pb-4 mb-2 shadow-sm hover:shadow-lg transition-all cursor-pointer min-w-[160px]"
     @click="$emit('click', item)"
   >
     <div class="text-center">

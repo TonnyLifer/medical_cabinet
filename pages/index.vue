@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+  <div class="min-h-screen bg-gradient-to-r from-blue-50 to-white">
     <!-- Приветствие пользователя -->
-    <section class="px-4 py-6">
+    <section class="px-4 py-5">
       <div class="flex items-center justify-between">
         <div>
           <h1 class="text-xl font-bold text-gray-900">
@@ -23,16 +23,7 @@
 
     <!-- Поисковая строка -->
     <section class="px-4 py-4">
-      <div class="relative">
-        <Icon name="heroicons:magnifying-glass" class="search-icon w-5 h-5" />
-        <input
-          v-model="searchQuery"
-          type="text"
-          placeholder="Find your doctor..."
-          class="search-input"
-          @focus="openSearch"
-        />
-      </div>
+      <SearchBar @open-search="openSearch" />
     </section>
 
 
@@ -81,7 +72,7 @@
     </section>
 
     <!-- Быстрые сервисы -->
-    <section class="px-4 py-6">
+    <section class="px-4 py-5">
       <div class="grid grid-cols-4 gap-4">
         <div
           v-for="service in quickServices"
@@ -98,7 +89,7 @@
     </section>
 
     <!-- Категории специалистов -->
-    <section class="px-4 py-4">
+    <section class="px-4">
       <div class="flex items-center justify-between mb-4">
         <h2 class="text-lg font-bold text-gray-900">
           Специалисты
@@ -106,7 +97,7 @@
         <UButton
           variant="ghost"
           size="sm"
-          class="text-blue-600 font-semibold"
+          class="view-all-button text-green-500 font-semibold hover:text-green-600 hover:bg-gray-50"
           @click="$router.push('/doctors')"
         >
           Посмотреть все
@@ -129,7 +120,7 @@
     </section>
 
     <!-- Доступные врачи -->
-    <section class="px-4 py-4">
+    <section class="px-4 py-5">
       <div class="flex items-center justify-between mb-4">
         <h2 class="text-lg font-bold text-gray-900">
           Доступные врачи
@@ -137,30 +128,32 @@
         <UButton
           variant="ghost"
           size="sm"
-          class="text-blue-600 font-semibold"
+          class="view-all-button text-green-500 font-semibold hover:text-green-600 hover:bg-gray-50"
           @click="$router.push('/doctors')"
         >
           Посмотреть все
         </UButton>
       </div>
       
-      <AppSwiper
-        :items="topDoctors"
-        :slides-per-view="1.5"
-        :space-between="16"
-        class="pb-2"
-      >
+      <div class="py-2">
+        <AppSwiper
+          :items="topDoctors"
+          :slides-per-view="2"
+          :space-between="12"
+          class="pb-4"
+        >
         <template #default="{ item }">
           <DoctorCard
             :item="item"
             @click="handleDoctorClick"
           />
         </template>
-      </AppSwiper>
+        </AppSwiper>
+      </div>
     </section>
 
     <!-- Топ врачи -->
-    <section class="px-4 py-6">
+    <section class="px-4 py-5">
       <div class="flex items-center justify-between mb-4">
         <h2 class="text-lg font-bold text-gray-900">
           Топ врачи
@@ -168,7 +161,7 @@
         <UButton
           variant="ghost"
           size="sm"
-          class="text-blue-600 font-semibold"
+          class="view-all-button text-green-500 font-semibold hover:text-green-600 hover:bg-gray-50"
           @click="$router.push('/doctors')"
         >
           Посмотреть все
@@ -214,7 +207,7 @@
     </section>
 
     <!-- Недавно просмотренные -->
-    <section class="px-4 py-6">
+    <section class="px-4 py-5">
       <div class="flex items-center justify-between mb-4">
         <h2 class="text-lg font-bold text-gray-900">
           Недавно просмотренные
@@ -222,7 +215,7 @@
         <UButton
           variant="ghost"
           size="sm"
-          class="text-blue-600 font-semibold"
+          class="view-all-button text-green-500 font-semibold hover:text-green-600 hover:bg-gray-50"
           @click="$router.push('/doctors')"
         >
           Посмотреть все
@@ -257,53 +250,31 @@ const router = useRouter()
 const toast = useToast()
 
 const userName = ref('mosarraf')
-const searchQuery = ref('')
 
 const quickServices = [
   {
-    name: 'Doctors',
+    name: 'Врачи',
     icon: 'heroicons:user-group',
     bgColor: 'bg-blue-100',
     iconColor: 'text-blue-600',
     action: 'find-doctor'
   },
   {
-    name: 'Pharmacy',
+    name: 'Аптеки',
     icon: 'heroicons:beaker',
     bgColor: 'bg-green-100',
     iconColor: 'text-green-600',
     action: 'pharmacies'
   },
   {
-    name: 'Hospital',
+    name: 'Больницы',
     icon: 'heroicons:building-office-2',
     bgColor: 'bg-red-100',
     iconColor: 'text-red-600',
     action: 'hospitals'
   },
   {
-    name: 'Doctors',
-    icon: 'heroicons:user-group',
-    bgColor: 'bg-blue-100',
-    iconColor: 'text-blue-600',
-    action: 'find-doctor'
-  },
-  {
-    name: 'Pharmacy',
-    icon: 'heroicons:beaker',
-    bgColor: 'bg-green-100',
-    iconColor: 'text-green-600',
-    action: 'pharmacies'
-  },
-  {
-    name: 'Hospital',
-    icon: 'heroicons:building-office-2',
-    bgColor: 'bg-red-100',
-    iconColor: 'text-red-600',
-    action: 'hospitals'
-  },
-  {
-    name: 'More',
+    name: 'Больше',
     icon: 'heroicons:squares-2x2',
     bgColor: 'bg-gray-100',
     iconColor: 'text-gray-600',
@@ -314,7 +285,7 @@ const quickServices = [
 const popularSpecialties: Specialty[] = [
   {
     id: '1',
-    name: 'Cardiologist',
+    name: 'Кардиолог',
     icon: '',
     description: 'Heart specialist',
     doctorsCount: 156,
@@ -323,7 +294,7 @@ const popularSpecialties: Specialty[] = [
   },
   {
     id: '2',
-    name: 'Dentist',
+    name: 'Стоматолог',
     icon: '',
     description: 'Dental care',
     doctorsCount: 89,
@@ -332,12 +303,66 @@ const popularSpecialties: Specialty[] = [
   },
   {
     id: '3',
-    name: 'Pathologist',
+    name: 'Терапевт',
     icon: '',
     description: 'Lab specialist',
     doctorsCount: 67,
     emoji: '🔬',
     bgColor: 'bg-green-100'
+  },
+  {
+    id: '4',
+    name: 'Невролог',
+    icon: '',
+    description: 'Neurology specialist',
+    doctorsCount: 67,
+    emoji: '🧠',
+    bgColor: 'bg-purple-100'
+  },
+  {
+    id: '5',
+    name: 'Дерматолог',
+    icon: '',
+    description: 'Dermatology specialist',
+    doctorsCount: 67,
+    emoji: '👩‍⚕️',
+    bgColor: 'bg-pink-100'
+  },
+  {
+    id: '6',
+    name: 'Педиатр',
+    icon: '',
+    description: 'Pediatrician',
+    doctorsCount: 67,
+    emoji: '👶',
+    bgColor: 'bg-orange-100'
+  },
+  {
+    id: '7',
+    name: 'Гинеколог',
+    icon: '',
+    description: 'Gynecologist',
+    doctorsCount: 67,
+    emoji: '👩‍⚕️',
+    bgColor: 'bg-pink-100'
+  },
+  {
+    id: '8',
+    name: 'Офтальмолог',
+    icon: '',
+    description: 'Ophthalmologist',
+    doctorsCount: 67,
+    emoji: '👁️',
+    bgColor: 'bg-blue-100'
+  },
+  {
+    id: '9',
+    name: 'ЛОР',
+    icon: '',
+    description: 'LOR',
+    doctorsCount: 67,
+    emoji: '👃',
+    bgColor: 'bg-purple-100'
   }
 ]
 
@@ -469,7 +494,9 @@ const handleQuickAction = (action: any) => {
 }
 
 const openSearch = () => {
-  router.push('/search')
+  // Эмитим событие для открытия поиска в layout
+  const event = new CustomEvent('open-search')
+  window.dispatchEvent(event)
 }
 
 const handleSpecialtyClick = (item: any) => {

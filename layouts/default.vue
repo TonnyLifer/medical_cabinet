@@ -61,34 +61,10 @@
     </main>
 
     <!-- Модальные окна -->
-    <UModal v-model="isSearchOpen">
-      <div class="p-6">
-        <h3 class="text-lg font-semibold mb-4">Поиск</h3>
-        <UInput
-          v-model="searchQuery"
-          placeholder="Найти врача, специальность..."
-          size="lg"
-          autofocus
-        />
-        <!-- Результаты поиска -->
-        <div class="mt-4 space-y-2">
-          <div
-            v-for="result in searchResults"
-            :key="result.id"
-            class="p-3 hover:bg-gray-50 rounded-lg cursor-pointer"
-            @click="selectSearchResult(result)"
-          >
-            <div class="flex items-center space-x-3">
-              <Icon :name="result.icon" class="w-5 h-5 text-gray-400" />
-              <div>
-                <p class="font-medium">{{ result.title }}</p>
-                <p class="text-sm text-gray-500">{{ result.description }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </UModal>
+    <SearchModal 
+      v-model="isSearchOpen" 
+      @select="selectSearchResult"
+    />
 
     <UModal v-model="isNotificationsOpen">
       <div class="p-6">
@@ -123,42 +99,14 @@
 <script setup lang="ts">
 import type { Notification } from '~/types'
 import AppNavigation from '~/components/AppNavigation.vue'
+import SearchModal from '~/components/SearchModal.vue'
 
 const route = useRoute()
 const router = useRouter()
 
 const isSearchOpen = ref(false)
 const isNotificationsOpen = ref(false)
-const searchQuery = ref('')
 const unreadNotifications = ref(3)
-
-const searchResults = computed(() => {
-  if (!searchQuery.value) return []
-  
-  return [
-    {
-      id: 1,
-      title: 'Кардиолог',
-      description: 'Специалисты по сердечно-сосудистым заболеваниям',
-      icon: 'heroicons:heart'
-    },
-    {
-      id: 2,
-      title: 'Терапевт',
-      description: 'Врачи общей практики',
-      icon: 'heroicons:user'
-    },
-    {
-      id: 3,
-      title: 'Невролог',
-      description: 'Специалисты по нервной системе',
-      icon: 'heroicons:brain'
-    }
-  ].filter(item => 
-    item.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-    item.description.toLowerCase().includes(searchQuery.value.toLowerCase())
-  )
-})
 
 const notifications: Notification[] = [
   {
@@ -190,6 +138,15 @@ const notifications: Notification[] = [
 const openSearch = () => {
   isSearchOpen.value = true
 }
+
+// Слушаем событие открытия поиска с главной страницы
+onMounted(() => {
+  window.addEventListener('open-search', openSearch)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('open-search', openSearch)
+})
 
 const openNotifications = () => {
   isNotificationsOpen.value = true
