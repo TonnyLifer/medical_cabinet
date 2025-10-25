@@ -9,7 +9,8 @@ export default defineNuxtConfig({
 
   ui: {
     global: true,
-    icons: ['heroicons', 'lucide', 'material-symbols']
+    icons: ['heroicons', 'lucide', 'material-symbols'],
+    safelistColors: []
   },
 
   css: [

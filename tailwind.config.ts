@@ -10,6 +10,10 @@ export default <Config>{
     './app.vue',
     './error.vue'
   ],
+  safelist: {
+    pattern: /^(bg|text|ring)-(primary|secondary|accent|success|danger|warning|info|gray|red|blue|green|yellow|purple|pink|indigo)-(50|100|200|300|400|500|600|700|800|900)$/,
+    variants: ['hover', 'focus', 'active', 'disabled']
+  },
   theme: {
     extend: {
       colors: {
