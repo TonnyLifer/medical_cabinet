@@ -1,0 +1,96 @@
+/* Адаптивные отступы для мобильных устройств */
+@media (max-width: 640px) {
+  .booking-mobile-padding {
+    padding-left: 0.75rem; /* 12px */
+    padding-right: 0.75rem; /* 12px */
+  }
+  
+  .booking-content-padding {
+    padding-left: 0.5rem; /* 8px */
+    padding-right: 0.5rem; /* 8px */
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .booking-mobile-padding {
+    padding-left: 1.5rem; /* 24px */
+    padding-right: 1.5rem; /* 24px */
+  }
+}
+
+/* Улучшенные отступы для карточек специализаций */
+@media (max-width: 640px) {
+  .specialty-grid {
+    gap: 0.75rem; /* 12px вместо 16px */
+  }
+  
+  .specialty-card {
+    padding: 0.75rem; /* 12px вместо 16px */
+  }
+}
+
+/* Адаптивные размеры текста для заголовков */
+@media (max-width: 640px) {
+  .booking-title {
+    font-size: 1.875rem; /* 30px вместо 36px */
+    line-height: 2.25rem; /* 36px */
+  }
+}
+
+@media (min-width: 641px) {
+  .booking-title {
+    font-size: 2.25rem; /* 36px */
+    line-height: 2.5rem; /* 40px */
+  }
+}
+
+/* Скрытие полосы прокрутки */
+.scrollbar-hide {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Адаптивные стили для календаря */
+@media (max-width: 640px) {
+  .calendar-container {
+    padding: 0.5rem;
+  }
+  
+  .calendar-day {
+    min-width: 2.5rem;
+    padding: 0.5rem;
+  }
+}
+
+/* Адаптивные стили для временных слотов */
+@media (max-width: 640px) {
+  .time-slots {
+    gap: 0.5rem;
+  }
+  
+  .time-slot-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Адаптивные стили для карточек врачей */
+@media (max-width: 640px) {
+  .doctor-card {
+    padding: 0.75rem;
+  }
+  
+  .doctor-avatar {
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  .price-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
