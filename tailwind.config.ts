@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss'
 
 export default <Config>{
+  darkMode: 'class',
   content: [
     './components/**/*.{js,vue,ts}',
     './layouts/**/*.vue',
@@ -12,40 +13,32 @@ export default <Config>{
   theme: {
     extend: {
       colors: {
-        medical: {
-          50: '#eff6ff',
-          100: '#dbeafe', 
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#0085FE',
-          600: '#0066C7',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a'
-        }
+        primary: '#1193d4',
+        'primary-light': '#DBEAFE',
+        secondary: '#38A169',
+        accent: '#E53E3E',
+        'background-light': '#FFFFFF',
+        'background-dark': '#1A202C',
+        'neutral-light': '#EDF2F7',
+        'neutral-dark': '#2D3748',
+        'text-light': '#1A202C',
+        'text-dark': '#E2E8F0',
+        'border-light': '#E2E8F0',
+        'border-dark': '#2D3748',
+        success: '#16A34A',
+        danger: '#DC2626',
+        'accent-green': '#28a745',
+        'alert-red': '#dc3545'
       },
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+        display: ['Inter', 'sans-serif']
       },
-      animation: {
-        'fade-in': 'fadeIn 0.6s ease-out',
-        'slide-up': 'slideUp 0.6s ease-out',
-        'bounce-slow': 'bounce 2s infinite'
-      },
-      keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' }
-        },
-        slideUp: {
-          '0%': { opacity: '0', transform: 'translateY(30px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' }
-        }
-      },
-      boxShadow: {
-        'medical': '0 4px 25px -5px rgba(0, 133, 254, 0.15)',
-        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)'
+      borderRadius: {
+        DEFAULT: '0.25rem',
+        lg: '0.5rem',
+        xl: '1rem',
+        '2xl': '1rem',
+        full: '9999px'
       }
     }
   },
