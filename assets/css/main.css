@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Адаптивные отступы для мобильных устройств */
 @media (max-width: 640px) {
   .booking-mobile-padding {
@@ -93,4 +97,15 @@
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
   }
+}
+
+/* Utility shims for Nuxt UI expecting Tailwind shade classes.
+   We don't change Tailwind config; we just provide the few classes it asks for. */
+@layer utilities {
+  .bg-primary-400 { background-color: #1193d4 !important; }
+  .bg-primary-500 { background-color: #1193d4 !important; }
+  .text-primary-400 { color: #1193d4 !important; }
+  .text-primary-500 { color: #1193d4 !important; }
+  .ring-primary-400 { --tw-ring-color: #1193d4 !important; }
+  .ring-primary-500 { --tw-ring-color: #1193d4 !important; }
 }
